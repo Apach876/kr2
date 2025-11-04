@@ -47,8 +47,35 @@
         </div>
     </div>
 </nav>
-<main class="container">
-    <div class="card-body">
+
+<main class="container mb-5 mt-5">
+    <form class="row g-3 needs-validation" novalidate>
+        <div class="col-md-4">
+            <label for="validationCustom01" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="validationCustom01" value="Иван" required>
+            <div class="valid-feedback">
+                Все хорошо!
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationEmail" class="form-label">Почта</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="text" class="form-control" id="validationEmail" aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Пожалуйста, введите корректную почту.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label  class="form-label">Сообщение</label>
+            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Отправить форму</button>
+        </div>
+    </form>
+    <div class="card-body mt-5">
         <div class="row">
             <section>
                 <div class="card-header bg-light">
@@ -57,13 +84,13 @@
                         Контакты
                     </h3>
                 </div>
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 pb-1 pt-1">
                     <p class="mb-0">student@edu.ru</p>
                 </div>
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 pb-1 pt-1">
                     <p class="mb-0">Github: Apach876</p>
                 </div>
-                <div class="d-flex align-items-center gap-2">
+                <div class="d-flex align-items-center gap-2 pb-1 pt-1">
                     <p class="mb-0">Москва, Россия</p>
                 </div>
             </section>
