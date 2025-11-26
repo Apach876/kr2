@@ -49,27 +49,30 @@
 </nav>
 
 <main class="container mb-5 mt-5">
-    <form class="row g-3 needs-validation" novalidate>
+    <form class="row g-3 needs-validation" novalidate id="contactForm">
         <div class="col-md-4">
             <label for="validationCustom01" class="form-label">Имя</label>
-            <input type="text" class="form-control" id="validationCustom01" value="Иван" required>
-            <div class="valid-feedback">
-                Все хорошо!
+            <input type="text" class="form-control" id="validationCustom01" required minlength="2" maxlength="50">
+            <div class="invalid-feedback">
+                Пожалуйста, введите имя (от 2 до 50 символов).
             </div>
         </div>
         <div class="col-md-4">
             <label for="validationEmail" class="form-label">Почта</label>
             <div class="input-group has-validation">
                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                <input type="text" class="form-control" id="validationEmail" aria-describedby="inputGroupPrepend" required>
+                <input type="email" class="form-control" id="validationEmail" aria-describedby="inputGroupPrepend" required>
                 <div class="invalid-feedback">
                     Пожалуйста, введите корректную почту.
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <label  class="form-label">Сообщение</label>
-            <input type="text" class="form-control" aria-describedby="inputGroupPrepend" required>
+            <label for="validationMessage" class="form-label">Сообщение</label>
+            <input type="text" class="form-control" id="validationMessage" required minlength="10" maxlength="500">
+            <div class="invalid-feedback">
+                Сообщение должно быть от 10 до 500 символов.
+            </div>
         </div>
         <div class="col-12">
             <button class="btn btn-primary" type="submit">Отправить форму</button>
@@ -106,5 +109,32 @@
         </div>
     </div>
 </footer>
+
+<script>
+    (function () {
+        'use strict'
+
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+        }, false);
+
+        const emailInput = document.getElementById('validationEmail');
+        emailInput.addEventListener('input', function () {
+            if (emailInput.validity.typeMismatch) {
+                emailInput.setCustomValidity('Пожалуйста, введите корректный email адрес');
+            } else {
+                emailInput.setCustomValidity('');
+            }
+        });
+
+    })();
+</script>
 </body>
 </html>
