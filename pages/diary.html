@@ -2,44 +2,94 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Учебный дневник</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+        }
+        .skip-link:focus {
+            top: 6px;
+        }
+        .focus-visible:focus-visible {
+            outline: 2px solid #0d6efd;
+            outline-offset: 2px;
+        }
+        .diary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .progress-item {
+            transition: transform 0.2s ease;
+        }
+        .progress-item:hover {
+            transform: translateX(5px);
+        }
+        .status-icon {
+            font-size: 1.2rem;
+        }
+        .spinner-icon {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body class="bg-light">
+<a href="#main-content" class="skip-link focus-visible">Перейти к основному содержанию</a>
+
 <div class="container-fluid p-0">
     <header class="bg-primary text-white py-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-md-8 mx-auto text-center">
-                    <img src="/kr2/images/logo.png" alt="Логотип" class="mb-3" style="height: 120px">
+                    <img src="/kr2/images/logo.png"
+                         alt="Логотип"
+                         class="mb-3"
+                         style="height: 120px"
+                         width="120"
+                         height="120"
+                         loading="lazy">
                     <h1 class="h3 mb-1">Гришин Артём</h1>
                 </div>
             </div>
         </div>
     </header>
 </div>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/index.html">
+                    <a class="nav-link focus-visible" href="/kr2/index.html">
                         <i class="bi bi-house me-1"></i>Главная
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/pages/projects.html">
+                    <a class="nav-link focus-visible" href="/kr2/pages/projects.html">
                         <i class="bi bi-newspaper me-1"></i>Проекты
                     </a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link active" href="/kr2/pages/diary.html">
+                <li class="nav-item">
+                    <a class="nav-link active focus-visible" href="/kr2/pages/diary.html">
                         <i class="bi bi-code-slash me-1"></i>Дневник
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/pages/contacts.html">
+                    <a class="nav-link focus-visible" href="/kr2/pages/contacts.html">
                         <i class="bi bi-cart me-1"></i>Контакты
                     </a>
                 </li>
@@ -47,93 +97,146 @@
         </div>
     </div>
 </nav>
-<main>
+
+<main id="main-content" class="container my-4">
     <section class="mb-5">
         <div class="card shadow-sm">
-            <div class="card-header bg-light">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
                 <h3 class="card-title h5 mb-0">
-                    <i class="bi bi-tools text-primary"></i>
+                    <i class="bi bi-journal-text text-primary me-2"></i>
                     Мой учебный прогресс
                 </h3>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                    <i class="bi bi-plus-circle me-1"></i>Добавить запись
+                </button>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <section>
-                        <div class="d-flex align-items-center gap-2">
-                            <p class="mb-0">15 дек - Верстка макета сайта</p>
-                            <i class="bi bi-check-circle-fill text-success"></i>
+                <div class="diary-grid">
+                    <div class="progress-item p-3 border rounded">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-bold">15 декабря</span>
+                            <i class="bi bi-check-circle-fill text-success status-icon" aria-label="Завершено"></i>
                         </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <p class="mb-0">10 дек - JavaScript основы</p>
-                            <i class="bi bi-check-circle-fill text-success"></i>
+                        <p class="mb-0">Верстка макета сайта</p>
+                        <small class="text-muted">HTML, CSS, Bootstrap</small>
+                    </div>
+                    <div class="progress-item p-3 border rounded">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-bold">10 декабря</span>
+                            <i class="bi bi-check-circle-fill text-success status-icon" aria-label="Завершено"></i>
                         </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <p class="mb-0">05 дек - Работа с формами in progress</p>
+                        <p class="mb-0">JavaScript основы</p>
+                        <small class="text-muted">Переменные, функции, DOM</small>
+                    </div>
+                    <div class="progress-item p-3 border rounded">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-bold">05 декабря</span>
+                            <i class="bi bi-arrow-repeat text-warning status-icon spinner-icon" aria-label="В процессе"></i>
                         </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <p class="mb-0">01 дек - Адаптивный дизайн  in progress</p>
+                        <p class="mb-0">Работа с формами</p>
+                        <small class="text-muted">Валидация, обработка данных</small>
+                    </div>
+                    <div class="progress-item p-3 border rounded">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <span class="fw-bold">01 декабря</span>
+                            <i class="bi bi-arrow-repeat text-warning status-icon spinner-icon" aria-label="В процессе"></i>
                         </div>
-                    </section>
+                        <p class="mb-0">Адаптивный дизайн</p>
+                        <small class="text-muted">Media queries, Flexbox, Grid</small>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
     <section class="mb-5">
         <div class="card shadow-sm">
             <div class="card-header bg-light">
                 <h3 class="card-title h5 mb-0">
-                    <i class="bi bi-tools text-primary"></i>
+                    <i class="bi bi-graph-up text-primary me-2"></i>
                     Текущие курсы
                 </h3>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb1">
-                                <span>Веб разработка</span>
-                                <span class="text-primary">90%</span>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="form-label mb-0">Веб разработка</span>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-primary me-2">90%</span>
+                                    <i class="bi bi-check-circle-fill text-success status-icon" aria-label="Завершено"></i>
+                                </div>
                             </div>
-                            <div class="progress" style="height: 8px;">
+                            <div class="progress" style="height: 10px;">
                                 <div class="progress-bar bg-primary"
-                                     style="width: 90%"></div>
+                                     role="progressbar"
+                                     style="width: 90%"
+                                     aria-valuenow="90"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"></div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb1">
-                                <span>JavaScript</span>
-                                <span class="text-primary">70%</span>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="form-label mb-0">JavaScript</span>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-primary me-2">70%</span>
+                                    <i class="bi bi-arrow-repeat text-warning status-icon spinner-icon" aria-label="В процессе"></i>
+                                </div>
                             </div>
-                            <div class="progress" style="height: 8px;">
+                            <div class="progress" style="height: 10px;">
                                 <div class="progress-bar bg-success"
-                                     style="width: 75%"></div>
+                                     role="progressbar"
+                                     style="width: 70%"
+                                     aria-valuenow="70"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb1">
-                                <span>React</span>
-                                <span class="text-primary">50%</span>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="form-label mb-0">React</span>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-primary me-2">50%</span>
+                                    <i class="bi bi-arrow-repeat text-warning status-icon spinner-icon" aria-label="В процессе"></i>
+                                </div>
                             </div>
-                            <div class="progress" style="height: 8px;">
+                            <div class="progress" style="height: 10px;">
                                 <div class="progress-bar bg-info"
-                                     style="width: 85%"></div>
+                                     role="progressbar"
+                                     style="width: 50%"
+                                     aria-valuenow="50"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="form-label mb-0">Адаптивный дизайн</span>
+                                <div class="d-flex align-items-center">
+                                    <span class="text-primary me-2">65%</span>
+                                    <i class="bi bi-arrow-repeat text-warning status-icon spinner-icon" aria-label="В процессе"></i>
+                                </div>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-warning"
+                                     role="progressbar"
+                                     style="width: 65%"
+                                     aria-valuenow="65"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb1">
-                                <span>[Добавить запись]</span>
-                            </div>
-                        </div>
                 </div>
             </div>
         </div>
-        </div>
     </section>
 </main>
+
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
         <div class="row align-items-center">
@@ -143,5 +246,105 @@
         </div>
     </div>
 </footer>
+
+<div class="modal fade" id="addEntryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить запись в дневник</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="entryForm">
+                    <div class="mb-3">
+                        <label for="entryDate" class="form-label">Дата</label>
+                        <input type="date" class="form-control" id="entryDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="entryTitle" class="form-label">Название</label>
+                        <input type="text" class="form-control" id="entryTitle" required placeholder="Введите название темы">
+                    </div>
+                    <div class="mb-3">
+                        <label for="entryDescription" class="form-label">Описание</label>
+                        <textarea class="form-control" id="entryDescription" rows="3" placeholder="Опишите, что вы изучили"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="entryTags" class="form-label">Теги/технологии</label>
+                        <input type="text" class="form-control" id="entryTags" placeholder="HTML, CSS, JavaScript">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Статус</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="entryStatus" id="statusCompleted" value="completed" checked>
+                            <label class="form-check-label" for="statusCompleted">
+                                <i class="bi bi-check-circle-fill text-success me-1"></i>Завершено
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="entryStatus" id="statusInProgress" value="in-progress">
+                            <label class="form-check-label" for="statusInProgress">
+                                <i class="bi bi-arrow-repeat text-warning me-1"></i>В процессе
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="submitEntryForm()">Добавить запись</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function submitEntryForm() {
+        const form = document.getElementById('entryForm');
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        const entryData = {
+            date: document.getElementById('entryDate').value,
+            title: document.getElementById('entryTitle').value,
+            description: document.getElementById('entryDescription').value,
+            tags: document.getElementById('entryTags').value,
+            status: document.querySelector('input[name="entryStatus"]:checked').value
+        };
+
+        console.log('Добавлена новая запись:', entryData);
+        alert('Запись успешно добавлена в дневник!');
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addEntryModal'));
+        modal.hide();
+        form.reset();
+
+        document.getElementById('entryDate').value = new Date().toISOString().split('T')[0];
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('entryDate').value = today;
+
+        const focusableElements = document.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusableElements.forEach(el => {
+            el.addEventListener('focus', function() {
+                this.classList.add('focus-visible');
+            });
+            el.addEventListener('blur', function() {
+                this.classList.remove('focus-visible');
+            });
+        });
+
+        document.getElementById('entryForm').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && event.target.type !== 'textarea') {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 </html>

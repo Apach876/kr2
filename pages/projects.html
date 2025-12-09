@@ -2,44 +2,102 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проекты</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            text-decoration: none;
+        }
+        .skip-link:focus {
+            top: 6px;
+        }
+        .focus-visible:focus-visible {
+            outline: 2px solid #0d6efd;
+            outline-offset: 2px;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-item {
+            height: 150px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+        .modal-lg {
+            max-width: 900px;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body class="bg-light">
+<a href="#main-content" class="skip-link focus-visible">Перейти к основному содержанию</a>
+
 <div class="container-fluid p-0">
     <header class="bg-primary text-white py-4">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-md-8 mx-auto text-center">
-                    <img src="/kr2/images/logo.png" alt="Логотип" class="mb-3" style="height: 120px">
+                    <img src="/kr2/images/logo.png"
+                         alt="Логотип"
+                         class="mb-3"
+                         style="height: 120px"
+                         width="120"
+                         height="120"
+                         loading="lazy">
                     <h1 class="h3 mb-1">Гришин Артём</h1>
                 </div>
             </div>
         </div>
     </header>
 </div>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/index.html">
+                    <a class="nav-link focus-visible" href="/kr2/index.html">
                         <i class="bi bi-house me-1"></i>Главная
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/kr2/pages/projects.html">
+                    <a class="nav-link active focus-visible" href="/kr2/pages/projects.html">
                         <i class="bi bi-newspaper me-1"></i>Проекты
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/pages/diary.html">
+                    <a class="nav-link focus-visible" href="/kr2/pages/diary.html">
                         <i class="bi bi-code-slash me-1"></i>Дневник
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kr2/pages/contacts.html">
+                    <a class="nav-link focus-visible" href="/kr2/pages/contacts.html">
                         <i class="bi bi-cart me-1"></i>Контакты
                     </a>
                 </li>
@@ -47,13 +105,13 @@
         </div>
     </div>
 </nav>
-<main>
+
+<main id="main-content">
     <section class="mb-5 mt-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10">
                     <div class="shadow-sm">
-
                         <div class="card-header bg-light">
                             <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                                 <h3 class="card-title h5 mb-0">
@@ -61,65 +119,103 @@
                                     Мои проекты
                                 </h3>
                                 <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge bg-primary">ВСЕ</span>
-                                    <span class="badge bg-primary">HTML</span>
-                                    <span class="badge bg-primary">JS</span>
-                                    <span class="badge bg-primary">React</span>
+                                    <button class="badge bg-primary border-0 focus-visible" type="button">ВСЕ</button>
+                                    <button class="badge bg-secondary border-0 focus-visible" type="button">HTML</button>
+                                    <button class="badge bg-secondary border-0 focus-visible" type="button">JS</button>
+                                    <button class="badge bg-secondary border-0 focus-visible" type="button">React</button>
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Личный сайт</h5>
-                                            <p class="card-text">
-                                                HTML, CSS
-                                            </p>
+                            <div class="projects-grid">
+                                <div class="card h-100 project-card" data-bs-toggle="modal" data-bs-target="#projectModal" data-project="1">
+                                    <img
+                                            src="/kr2/images/project1-small.jpg"
+                                            alt="Скриншот личного сайта"
+                                            class="card-img-top"
+                                            style="height: 200px; object-fit: cover;"
+                                            width="400"
+                                            height="200"
+                                            loading="lazy">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Личный сайт</h5>
+                                        <p class="card-text">HTML, CSS</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-primary">HTML</span>
+                                            <span class="badge bg-primary">CSS</span>
+                                            <span class="badge bg-primary">Bootstrap</span>
                                         </div>
+                                        <button class="btn btn-outline-primary btn-sm focus-visible">Подробнее</button>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Todo-приложение</h5>
-                                            <p class="card-text">
-                                                JavaScript
-                                            </p>
+                                <div class="card h-100 project-card" data-bs-toggle="modal" data-bs-target="#projectModal" data-project="2">
+                                    <img
+                                            src="/kr2/images/todo.jpg"
+                                            alt="Скриншот Todo-приложения"
+                                            class="card-img-top"
+                                            style="height: 200px; object-fit: cover;"
+                                            width="400"
+                                            height="200"
+                                            loading="lazy">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Todo-приложение</h5>
+                                        <p class="card-text">JavaScript</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-success">JavaScript</span>
+                                            <span class="badge bg-success">LocalStorage</span>
                                         </div>
+                                        <button class="btn btn-outline-primary btn-sm focus-visible">Подробнее</button>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Интернет-магазин</h5>
-                                            <p class="card-text">
-                                                React
-                                            </p>
+                                <div class="card h-100 project-card" data-bs-toggle="modal" data-bs-target="#projectModal" data-project="3">
+                                    <img
+                                            src="/kr2/images/market.jpg"
+                                            alt="Скриншот интернет-магазина"
+                                            class="card-img-top"
+                                            style="height: 200px; object-fit: cover;"
+                                            width="400"
+                                            height="200"
+                                            loading="lazy">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Интернет-магазин</h5>
+                                        <p class="card-text">React</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-info">React</span>
+                                            <span class="badge bg-info">API</span>
+                                            <span class="badge bg-info">Redux</span>
                                         </div>
+                                        <button class="btn btn-outline-primary btn-sm focus-visible">Подробнее</button>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
-                                    <div class="card h-100">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">Портфолио</h5>
-                                            <p class="card-text">
-                                                Bootstrap
-                                            </p>
+                                <div class="card h-100 project-card" data-bs-toggle="modal" data-bs-target="#projectModal" data-project="4">
+                                    <img
+                                            src="/kr2/images/po.jpg"
+                                            alt="Скриншот портфолио"
+                                            class="card-img-top"
+                                            style="height: 200px; object-fit: cover;"
+                                            width="400"
+                                            height="200"
+                                            loading="lazy">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Портфолио</h5>
+                                        <p class="card-text">Bootstrap</p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-warning">Bootstrap</span>
+                                            <span class="badge bg-warning">SASS</span>
+                                            <span class="badge bg-warning">Responsive</span>
                                         </div>
+                                        <button class="btn btn-outline-primary btn-sm focus-visible">Подробнее</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container">
         <div class="row align-items-center">
@@ -129,5 +225,171 @@
         </div>
     </div>
 </footer>
+
+<div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Личный сайт</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-4">
+                    <h6>Описание проекта</h6>
+                    <p id="modalDescription">Сайт-портфолио на HTML, CSS и Bootstrap с адаптивным дизайном.</p>
+                </div>
+                <div class="mb-4">
+                    <h6>Исходный код</h6>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="sourceCode" value="https://github.com/username/project" readonly>
+                        <button class="btn btn-outline-secondary" type="button" onclick="copySourceCode()">
+                            <i class="bi bi-copy"></i>
+                        </button>
+                        <a href="#" class="btn btn-primary" id="sourceLink" target="_blank">
+                            <i class="bi bi-github"></i> Перейти
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h6>Галерея скриншотов</h6>
+                    <div class="row g-3" id="galleryContainer">
+                        <div class="col-md-6">
+                            <div class="gallery-item">
+                                <img src="" alt="Скриншот 1" class="gallery-img" id="galleryImg1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="gallery-item">
+                                <img src="" alt="Скриншот 2" class="gallery-img" id="galleryImg2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="openLiveDemo()">Посмотреть демо</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const projects = {
+        1: {
+            title: "Личный сайт",
+            description: "Адаптивный сайт-портфолио с использованием HTML5, CSS3 и Bootstrap 5. Включает разделы: о себе, навыки, проекты, контакты. Полностью адаптивный дизайн для всех устройств.",
+            sourceCode: "https://github.com/username/personal-site",
+            demoLink: "https://personal-site-demo.netlify.app",
+            screenshots: [
+                "/kr2/images/ls.jpg",
+                "/kr2/images/ls2.jpg"
+            ]
+        },
+        2: {
+            title: "Todo-приложение",
+            description: "Приложение для управления задачами с использованием чистого JavaScript. Функции: добавление, редактирование, удаление задач, фильтрация по статусу, сохранение в LocalStorage.",
+            sourceCode: "https://github.com/username/todo-app",
+            demoLink: "https://todo-app-demo.netlify.app",
+            screenshots: [
+                "/kr2/images/td.jpg",
+                "/kr2/images/td2.jpg"
+            ]
+        },
+        3: {
+            title: "Интернет-магазин",
+            description: "SPA интернет-магазин на React с использованием Redux для управления состоянием. Интеграция с REST API, корзина покупок, фильтрация товаров, система авторизации.",
+            sourceCode: "https://github.com/username/ecommerce-shop",
+            demoLink: "https://ecommerce-shop-demo.netlify.app",
+            screenshots: [
+                "/kr2/images/mk1.jpg",
+                "/kr2/images/mk2.jpg"
+            ]
+        },
+        4: {
+            title: "Портфолио",
+            description: "Современное портфолио разработчика с использованием Bootstrap 5 и SASS. Анимации на CSS, адаптивная сетка, оптимизированная загрузка изображений.",
+            sourceCode: "https://github.com/username/portfolio",
+            demoLink: "https://portfolio-demo.netlify.app",
+            screenshots: [
+                "/kr2/images/p1.jpg",
+                "/kr2/images/p2.jpg"
+            ]
+        }
+    };
+
+    const projectModal = document.getElementById('projectModal');
+    projectModal.addEventListener('show.bs.modal', function(event) {
+        const card = event.relatedTarget;
+        const projectId = card.getAttribute('data-project');
+        const project = projects[projectId];
+
+        document.getElementById('modalTitle').textContent = project.title;
+        document.getElementById('modalDescription').textContent = project.description;
+        document.getElementById('sourceCode').value = project.sourceCode;
+        document.getElementById('sourceLink').href = project.sourceCode;
+
+        document.getElementById('galleryImg1').src = project.screenshots[0];
+        document.getElementById('galleryImg2').src = project.screenshots[1];
+
+        document.getElementById('galleryImg1').alt = `${project.title} - Скриншот 1`;
+        document.getElementById('galleryImg2').alt = `${project.title} - Скриншот 2`;
+    });
+
+    function copySourceCode() {
+        const input = document.getElementById('sourceCode');
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value);
+
+        const button = event.target.closest('button');
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="bi bi-check"></i>';
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+        }, 1000);
+    }
+
+    function openLiveDemo() {
+        const projectId = document.querySelector('.modal.show .btn-primary').getAttribute('data-project');
+        const project = projects[projectId];
+        if (project && project.demoLink) {
+            window.open(project.demoLink, '_blank');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const focusableElements = document.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        focusableElements.forEach(el => {
+            el.addEventListener('focus', function() {
+                this.classList.add('focus-visible');
+            });
+            el.addEventListener('blur', function() {
+                this.classList.remove('focus-visible');
+            });
+        });
+
+        const filterButtons = document.querySelectorAll('.card-header .badge');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('bg-primary');
+                    btn.classList.add('bg-secondary');
+                });
+                this.classList.remove('bg-secondary');
+                this.classList.add('bg-primary');
+            });
+        });
+
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const button = this.querySelector('button');
+                if (button) button.focus();
+            });
+        });
+    });
+</script>
 </body>
 </html>
